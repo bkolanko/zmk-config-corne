@@ -8,188 +8,45 @@
 #define ADJ 3
 #define EXTRA 4
 
+/* Shorthand */
+#define _ &kp
+#define __ &none
+
+#define _CTLQ &hm LCTL Q /* Q (tap), ctrl (hold) */
+#define _CENT &th LCTL RET /* Enter (tap), ctrl (hold) */
+
+#define LAYOUT36( \
+	a0, a1, a2, a3, a4, /**/ a5, a6, a7, a8, a9, \
+	b0, b1, b2, b3, b4, /**/ b5, b6, b7, b8, b9, \
+	c0, c1, c2, c3, c4, /**/ c5, c6, c7, c8, c9, \
+	/*   */ d2, d3, d4, /**/ d5, d6, d7 \
+	) \
+	&none a0 a1 a2 a3 a4 a5 a6 a7 a8 a9 &none \
+	&none b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 &none \
+	&none c0 c1 c2 c3 c4 c5 c6 c7 c8 c9 &none \
+	      d2 d3 d4 d5 d6 d7
+
 / {
-    behaviors {
-        hm: homerow_mods {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HOMEROW_MODS";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick_tap_ms = <0>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
-
-            quick-tap-ms = <180>;
-            global-quick-tap;
-        };
-
-        para: para {
-            compatible = "zmk,behavior-tap-dance";
-            label = "PARA";
-            #binding-cells = <0>;
-            bindings = <&kp LEFT_PARENTHESIS>, <&kp RIGHT_PARENTHESIS>;
-        };
-
-        caps: caps {
-            compatible = "zmk,behavior-caps-word";
-            label = "CAPS";
-            #binding-cells = <0>;
-            continue-list = <MINUS BACKSPACE>;
-        };
-
-        paraless: paraless {
-            compatible = "zmk,behavior-mod-morph";
-            label = "PARALESS";
-            bindings = <&kp LEFT_PARENTHESIS>, <&kp LESS_THAN>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT)>;
-        };
-
-        paragreat: paragreat {
-            compatible = "zmk,behavior-mod-morph";
-            label = "PARAGREAT";
-            bindings = <&kp RIGHT_PARENTHESIS>, <&kp GREATER_THAN>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT)>;
-        };
-    };
-
-    macros {
-        browsertab: browsertab {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings =
-                <&macro_press>,
-                <&kp LCTRL>,
-                <&macro_tap>,
-                <&kp TAB>,
-                <&macro_release>,
-                <&kp LCTRL>;
-        };
-
-    };
-
-    combos {
-        compatible = "zmk,combos";
-
-        escape {
-            bindings = <&kp ESCAPE>;
-            key-positions = <13 29>;
-        };
-
-        delete {
-            bindings = <&kp DELETE>;
-            key-positions = <15 21>;
-        };
-
-        perc {
-            bindings = <&kp PERCENT>;
-            key-positions = <5 17>;
-        };
-
-        equal {
-            bindings = <&kp EQUAL>;
-            key-positions = <28 16>;
-        };
-
-        dollar {
-            bindings = <&kp DOLLAR>;
-            key-positions = <4 16>;
-        };
-
-        pound {
-            bindings = <&kp POUND>;
-            key-positions = <3 15>;
-        };
-
-        at {
-            bindings = <&kp AT>;
-            key-positions = <2 14>;
-        };
-
-        backslash {
-            bindings = <&kp BACKSLASH>;
-            key-positions = <26 14>;
-        };
-
-        copy {
-            bindings = <&kp K_COPY>;
-            key-positions = <28 27>;
-        };
-
-        paste {
-            bindings = <&kp K_PASTE>;
-            key-positions = <26 27>;
-        };
-
-        star {
-            bindings = <&kp STAR>;
-            key-positions = <8 20>;
-        };
-
-        slash {
-            bindings = <&kp SLASH>;
-            key-positions = <32 20>;
-        };
-
-        plus {
-            bindings = <&kp PLUS>;
-            key-positions = <7 19>;
-        };
-
-        minus {
-            bindings = <&kp KP_MINUS>;
-            key-positions = <31 19>;
-        };
-
-        underscore {
-            bindings = <&kp UNDER>;
-            key-positions = <30 18>;
-        };
-
-        leftbrack {
-            bindings = <&kp LEFT_BRACKET>;
-            key-positions = <31 32>;
-        };
-
-        rightbrack {
-            bindings = <&kp RIGHT_BRACKET>;
-            key-positions = <33 32>;
-        };
-
-        para-less {
-            bindings = <&paraless>;
-            key-positions = <20 19>;
-        };
-
-        para-great {
-            bindings = <&paragreat>;
-            key-positions = <20 21>;
-        };
-    };
-
     //
-
     keymap {
         compatible = "zmk,keymap";
 
         DEF {
             display-name = "Base";
 
-            // -----------------------------------------------------------------------------------------
-            // |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  |
-            // |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |
-            // |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  |
-            // | GUI | CTRL | SHFT | LWR | SPC |   | ENT | RSE  | BKSP | ALT | ESC |
-
-            bindings = <
-&kp TAB    &kp Q  &kp W  &kp E     &kp R  &kp T        &kp Y    &kp U      &kp I          &kp O    &kp P     &kp BACKSPACE
-&kp LSHFT  &kp A  &kp S  &kp D     &kp F  &kp G        &kp H    &kp J      &kp K          &kp L    &kp SEMI  &kp SQT
-&kp LCTRL  &kp Z  &kp X  &kp C     &kp V  &kp B        &kp N    &kp M      &kp COMMA      &kp DOT  &kp FSLH  &kp RSHFT
-                         &kp LGUI  &mo 1  &kp SPACE    &kp RET  &lt 2 TAB  &kp LEFT_ALT
-            >;
+            // ┌─────────────────────┐┌─────────────────────┐
+            // │ q^  w   f   p   b   ││ j   l   u   y   bks │ Colemak DH
+            // │ a   r   s   t   g   ││ m   n   e   i   o   │
+            // │ z   x   c   d   v   ││ k   h   ,_  .   ent^│ (ent-ctrl)
+            // └───────┐ gui SYM ↑   ││ ──  NAV alt ┌───────┘
+            //         └─────────────┘└─────────────┘
+            
+            bindings = < LAYOUT36(
+                _CTLQ,        _ W, _ F,    _ P,     _ B,    /**/  _ J,     _ L,     _ U,     _ Y,   _ BSPC,
+                _ A,          _ R, _ S,    _ T,     _ G,    /**/  _ M,     _ N,     _ E,     _ I,   _ O,
+                _ Z,          _ X, _ C,    _ D,     _ V,    /**/  _ K,     _ H,     _ COMMA, _ DOT, _CENT
+                /*,           */,  _ LGUI, &mo SYM, _ LSFT, /**/  _ SPACE, &mo NAV, _ LALT
+            ) >;
         };
 
         NAV {
