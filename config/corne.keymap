@@ -66,7 +66,7 @@
                 _ RCTRL, _ RGUI, _ SFTAB, _ TAB,      _ LALT, /**/ _ COMMA, _   HOME, _ UP,   _ END,   _ DEL,
                 _ N1,    _ N2,   _ N3,    _ N4,       _ N5,   /**/ _ DOT,   _   LEFT, _ DOWN, _ RIGHT, _ RET,
                 _ N6,    _ N7,   _ N8,    _ N9,       _ N0,   /**/ _ INS,   _   PGUP, _ PGDN, _ ESC,   _ LCTL
-                /*,                */,     __,  __,   _ LSFT  /**/ _ SPACE, __, _ RALT
+                /*,                */,     __,  __,   _ LSFT, /**/ _ SPACE, __, _ RALT
             ) >;
         };
 
