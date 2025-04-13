@@ -15,6 +15,10 @@
 #define _CTLQ &mt LCTL Q /* Q (tap), ctrl (hold) */
 #define _CENT &mt LCTL RET /* Enter (tap), ctrl (hold) */
 
+#define NTAB  LC(PGDN) /* Next tab */
+#define PTAB  LC(PGUP) /* Previous tab */
+#define SFTAB LS(TAB)  /* Shift-tab */
+
 #define LAYOUT36( \
 	a0, a1, a2, a3, a4, /**/ a5, a6, a7, a8, a9, \
 	b0, b1, b2, b3, b4, /**/ b5, b6, b7, b8, b9, \
@@ -51,36 +55,37 @@
 
         NAV {
             display-name = "NavNum";
+            // ┌─────────────────────┐┌─────────────────────┐
+            // │ ctl gui ⇤   ⇥   alt ││ ,   hme ▲   end del │
+            // │ 1   2   3   4   5   ││ .   ◀   ▼   ▶   ent │
+            // │ 6   7   8   9   0   ││ ins p↑  p↓  esc ctl │
+            // └───────┐ ·   SYM ·   ││ spc ━━  ralt┌───────┘
+            //         └─────────────┘└─────────────┘
 
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-            // | GUI | CTRL | SHFT | LWR | SPC |   | ENT | RSE  | BKSP | ALT | ESC |
-
-            bindings = <
-&trans  &kp N1  &kp N2    &kp N3       &kp N4           &kp N5           &kp N6   &kp N7        &kp N8        &kp N9        &kp N0  &trans
-&caps_word  &trans  &trans    &kp UP_ARROW  &trans      &kp PAGE_UP      &kp N0   &kp N4  &kp N5        &kp N6  &trans  &trans
-&trans  &trans  &kp LEFT  &kp DOWN      &kp RIGHT_ARROW  &kp PAGE_DOWN    &trans   &kp N1  &kp N2  &kp N3  &trans  &trans
-                          &kp LGUI      &trans           &kp SPACE        &kp RET  &trans        &trans
-            >;
+            bindings = < LAYOUT36(
+                _ RCTRL, _ RGUI, _ SFTAB, _ TAB,      _ LALT, /**/ _ COMMA, _   HOME, _ UP,   _ END,   _ DEL,
+                _ N1,    _ N2,   _ N3,    _ N4,       _ N5,   /**/ _ DOT,   _   LEFT, _ DOWN, _ RIGHT, _ RET,
+                _ N6,    _ N7,   _ N8,    _ N9,       _ N0,   /**/ _ INS,   _   PGUP, _ PGDN, _ ESC,   _ LCTL
+                /*,                */,     __,  __,   _ LSFT  /**/ _ SPACE, __, _ RALT
+            ) >;
         };
 
         SYM {
             display-name = "Symbols";
 
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-            // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-            // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-            //                    | GUI |     | SPC |   | ENT |     | ALT |
-
-            bindings = <
-&trans  &kp EXCL  &kp AT          &kp HASH        &kp DLLR         &kp PRCNT    &kp CARET  &kp AMPS   &kp ASTRK  &kp LEFT_PARENTHESIS  &kp RPAR  &trans
-&trans  &trans    &trans          &kp UP_ARROW    &trans           &kp GRAVE    &kp MINUS  &kp EQUAL  &kp LBKT   &kp RBKT              &kp BSLH  &trans
-&trans  &trans    &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp TILDE    &kp UNDER  &kp PLUS   &kp LBRC   &kp RBRC              &kp PIPE  &trans
-                                  &kp LGUI        &trans           &kp SPACE    &kp RET    &trans     &trans
-            >;
+            // ┌─────────────────────┐┌─────────────────────┐
+            // │ '⁺  "   ^   ?   `   ││ [   <   =   >   ]   │ Symbols
+            // │ !⁺  @   #   $   %   ││ {   (   :   )   }   │
+            // │ \⁺  ~   |   ;   &   ││ /   *   -   +   _   │ ⁺ = layer tap
+            // └───────┐─────────────││─────────────┌───────┘
+            //         │ ·   ▓▓  ADJ ││ ·   FUN ralt│
+            //         └─────────────┘└─────────────┘
+            bindings = < LAYOUT36(
+                _ QUOT,  _ DQT,   _ CARET, _ QMARK, _ GRAVE, /**/ _ LBKT,  _ LT,    _ EQUAL, _ GT,   _ RBKT,
+                _ EXCL,  _ AT,    _ HASH,  _ DLLR,  _ PRCNT, /**/ _ LBRC,  _ LPAR,  _ COLON, _ RPAR, _ RBRC,
+                - BSLH,  _ TILDE, _ PIPE,  _ SEMI,  _ AMPS,  /**/ _ SLASH, _ STAR,  _ MINUS, _ PLUS, _ UNDER
+                /*,                    */,      __,  __, __, /**/ _ SPACE, __, _ RALT
+            ) >;
         };
 
         ADJ {
