@@ -12,8 +12,8 @@
 #define _ &kp
 #define __ &none
 
-#define _CTLQ &hm LCTL Q /* Q (tap), ctrl (hold) */
-#define _CENT &th LCTL RET /* Enter (tap), ctrl (hold) */
+#define _CTLQ &mt LCTL Q /* Q (tap), ctrl (hold) */
+#define _CENT &mt LCTL RET /* Enter (tap), ctrl (hold) */
 
 #define LAYOUT36( \
 	a0, a1, a2, a3, a4, /**/ a5, a6, a7, a8, a9, \
